@@ -1,8 +1,10 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-; CapsLock 单独按下松开 → 切换大写锁定
-; CapsLock 组合键 → 导航/选中，不触发大写切换
+; ── 开机自启 ──────────────────────────────────────
+startupLnk := A_Startup "\CapsNav.lnk"
+if !FileExist(startupLnk)
+    FileCreateShortcut A_ScriptFullPath, startupLnk, A_ScriptDir
 
 ; ── 全屏检测：进游戏自动暂停，退出自动恢复 ────────
 SetTimer CheckFullscreen, 2000
