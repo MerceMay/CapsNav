@@ -4,6 +4,18 @@
 ; CapsLock 单独按下松开 → 切换大写锁定
 ; CapsLock 组合键 → 导航/选中，不触发大写切换
 
+; ── 全屏检测：进游戏自动暂停，退出自动恢复 ────────
+SetTimer CheckFullscreen, 2000
+
+CheckFullscreen() {
+    try {
+        hwnd := WinGetID("A")
+        WinGetPos(&x, &y, &w, &h, "ahk_id " hwnd)
+        isFullscreen := (x = 0 && y = 0 && w = A_ScreenWidth && h = A_ScreenHeight)
+        Suspend(isFullscreen ? 1 : 0)
+    }
+}
+
 capsUsed := false
 
 *CapsLock:: {
